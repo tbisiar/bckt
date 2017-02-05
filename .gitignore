@@ -10,3 +10,14 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# intellij files
+.idea/
+*.iml
+
+# Don't need target folder
+target/
+
+# Some random OS files
+.DS_STORE
+~$*
