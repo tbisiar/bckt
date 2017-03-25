@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.tbisiar.bckt.domain.Bucket;
@@ -20,7 +21,7 @@ public class BucketController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/bucket")
+    @RequestMapping(value="/bucket", method = RequestMethod.GET)
     public Bucket greeting(@RequestParam(value="name", defaultValue="World") String name) {
         Drop drop1 = createMockDrop1();
         Set<Drop> dropSet = new HashSet<>();
