@@ -1,16 +1,28 @@
 package com.tbisiar.bckt.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by tbis163 on 6/02/17.
  */
-public class Location {
+@Entity
+public class Location extends MongoObject {
 
-    private final String region;
-    private final double latitude;
-    private final double longitude;
-    private final String streetAddress;
-    private final String approach;
-    private final boolean isVerified;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long id;
+    private String region;
+    private double latitude;
+    private double longitude;
+    private String streetAddress;
+    private String approach;
+    private boolean isVerified;
+
+    // This constructor is required for JPA
+    protected Location(){}
 
     public Location(String region, double latitude, double longitude, String streetAddress, String approach, boolean isVerified) {
         this.region = region;
@@ -20,6 +32,8 @@ public class Location {
         this.approach = approach;
         this.isVerified = isVerified;
     }
+
+    public long getId() { return id; }
 
     public String getRegion() {
         return region;

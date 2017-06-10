@@ -2,18 +2,28 @@ package com.tbisiar.bckt.domain;
 
 import java.util.Set;
 
-public class Drop {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-    private final long id;
-    private final String title;
-    private final String description;
-    private final Set<Photo> photo;
-    private final Location location;
-    private final DropType dropType;
-    private final Set<Restriction> restrictions;
+@Entity
+public class Drop extends MongoObject {
 
-    public Drop(long id, String title, String description, Set<Photo> photo, Location location, DropType dropType, Set<Restriction> restrictions) {
-        this.id = id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long id;
+    private String title;
+    private String description;
+    private Set<Photo> photo;
+    private Location location;
+    private DropType dropType;
+    private Set<Restriction> restrictions;
+
+    // This constructor is required for JPA
+    protected Drop(){}
+
+    public Drop(String title, String description, Set<Photo> photo, Location location, DropType dropType, Set<Restriction> restrictions) {
         this.title = title;
         this.description = description;
         this.photo = photo;
@@ -22,9 +32,7 @@ public class Drop {
         this.restrictions = restrictions;
     }
 
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
 
     public String getTitle() {
         return title;

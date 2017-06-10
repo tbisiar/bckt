@@ -9,7 +9,7 @@
     <meta name="author" content="tbisiar">
     <link rel="icon" href="image/favicon.ico">
 
-    <title>BCKT</title>
+    <title>BuckeT</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -70,9 +70,24 @@
         try? Now you can make a note of them in your bucket and easily search them when you're
         ready!</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+    <!-- Search bar -->
+    <form class="form new-section" id="search-form" role="search">
+        <div class="input-group search-group">
+            <input type="text" id="id-input" class="form-control input-lg" placeholder="Search for activity"/>
+            <div class="input-group-btn">
+                <button class="btn btn-lg btn-search" type="submit">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <!-- Error -->
+    <div id="error-alert" class="alert alert-danger new-section hidden" role="alert">
+        <p>Error message placeholder</p>
+    </div>
 </div>
 
-<div class="bucket-container">
+<div id="bucket-container" class="row">
     <!--div class="row">
         <div class="col-md-12">
             <h1 class="display-4">Restaurants</h1>
@@ -133,9 +148,10 @@
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+<script src="js/jquery.min.js"></script>
 <!-- apparently bootstrap requires tether, but doesn't include it -->
-<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<!--<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>-->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <!-- Custom javascript for the BCKT application -->

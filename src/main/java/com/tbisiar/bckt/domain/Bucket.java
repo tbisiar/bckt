@@ -2,17 +2,25 @@ package com.tbisiar.bckt.domain;
 
 import java.util.Set;
 
-/**
-* Created by tbis163 on 6/02/17.
-*/
-public class Bucket {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-    private final long id;
-    private final String content;
-    private final Set<Drop> drops;
+@Entity
+public class Bucket extends MongoObject {
 
-    public Bucket(long id, String content, Set<Drop> drops) {
-        this.id = id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long id;
+    private String content;
+    private Set<Drop> drops;
+
+    // This constructor is required for JPA
+    protected Bucket(){}
+
+    // TODO: Rework to allow minimal constructor with only required attributes
+    public Bucket(String content, Set<Drop> drops) {
         this.content = content;
         this.drops = drops;
     }
@@ -27,6 +35,14 @@ public class Bucket {
 
     public Set<Drop> getDrops() {
         return drops;
+    }
+
+    public void addDrop(Drop drop) {
+        drops.add(drop);
+    }
+
+    public void removeDrop(Drop drop) {
+        drops.remove(drop);
     }
 
 }

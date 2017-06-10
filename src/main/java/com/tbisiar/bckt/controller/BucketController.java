@@ -1,8 +1,11 @@
 package com.tbisiar.bckt.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,21 +17,28 @@ import com.tbisiar.bckt.domain.Equipment;
 import com.tbisiar.bckt.domain.Location;
 import com.tbisiar.bckt.domain.Photo;
 import com.tbisiar.bckt.domain.Restriction;
+import com.tbisiar.bckt.service.BucketService;
 
 @RestController
 public class BucketController {
+
+    @Autowired
+    BucketService bucketService;
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping(value="/bucket", method = RequestMethod.GET)
-    public Bucket greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        Drop drop1 = createMockDrop1();
-        Set<Drop> dropSet = new HashSet<>();
-        dropSet.add(drop1);
+    public List<Bucket> greeting(@RequestParam(value="name", defaultValue="World") String name) {
+//        Drop drop1 = createMockDrop1();
+//        Set<Drop> dropSet = new HashSet<>();
+//        dropSet.add(drop1);
+//        Bucket mockBucket = new Bucket(counter.incrementAndGet(),
+//                String.format(template, name), dropSet);
+        bucketService.createDemoBucket();
+        List<Bucket> mockBuckets = bucketService.loadBucketsForUser(1);
 
-        return new Bucket(counter.incrementAndGet(),
-                String.format(template, name), dropSet);
+        return mockBuckets;
     }
 
     private Drop createMockDrop1() {
@@ -48,7 +58,6 @@ public class BucketController {
                 true);
 
         Equipment equipment = new Equipment(
-                1,
                 "Jandals",
                 "Protect you feet while allowing them to get wet!");
 
@@ -68,7 +77,6 @@ public class BucketController {
         restrictionSet.add(restriction);
 
         return new Drop(
-                1,
                 "Waipu Caves",
                 "Get lost in some unbelievable glow worm caves",
                 photoSet,
