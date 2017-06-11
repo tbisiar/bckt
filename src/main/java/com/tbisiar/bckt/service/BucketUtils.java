@@ -1,15 +1,17 @@
 package com.tbisiar.bckt.service;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by tbis163 on 11/06/17.
- */
 public class BucketUtils {
 
+    private BucketUtils(){}
+
+    // Based on https://stackoverflow.com/questions/2041778/how-to-initialize-hashset-values-by-construction
     public static <T> Set<T> newHashSet(T... objs) {
         Set<T> set = new HashSet<T>();
+        set.addAll(Arrays.asList(objs));
         for (T o : objs) {
             set.add(o);
         }

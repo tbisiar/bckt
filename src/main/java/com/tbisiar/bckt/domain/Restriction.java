@@ -1,18 +1,10 @@
 package com.tbisiar.bckt.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-/**
- * Created by tbis163 on 6/02/17.
- */
 @Entity
 public class Restriction extends MongoObject {
 
-    @Id
-    @GeneratedValue
-    private long id;
     private String tide; //TODO: make this an enum
     private String season; //TODO: make this an enum
     private String timeOfDay; //TODO: make this an enum
@@ -28,8 +20,6 @@ public class Restriction extends MongoObject {
         this.weather = weather;
         this.duration = duration;
     }
-
-    public long getId() { return id; }
 
     public String getTide() {
         return tide;

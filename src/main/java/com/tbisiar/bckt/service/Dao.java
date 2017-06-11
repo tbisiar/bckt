@@ -9,5 +9,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 Based on solution here: https://stackoverflow.com/questions/42831907/spring-boot-how-to-avoid-too-many-jpa-repositories-for-each-domain-class#
  */
 @NoRepositoryBean
-public interface Dao<T extends MongoObject> extends MongoRepository<T, Long> {
+interface Dao<T extends MongoObject> extends MongoRepository<T, Long> {
+    // Put special queries in here, not GenericDao
 }

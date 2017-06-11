@@ -1,19 +1,10 @@
 package com.tbisiar.bckt.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-/**
- * Created by tbis163 on 6/02/17.
- */
 @Entity
 public class Location extends MongoObject {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
     private String region;
     private double latitude;
     private double longitude;
@@ -32,8 +23,6 @@ public class Location extends MongoObject {
         this.approach = approach;
         this.isVerified = isVerified;
     }
-
-    public long getId() { return id; }
 
     public String getRegion() {
         return region;
