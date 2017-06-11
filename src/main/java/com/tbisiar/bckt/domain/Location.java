@@ -1,8 +1,11 @@
 package com.tbisiar.bckt.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Entity;
 
 @Entity
+@Document(collection ="location")
 public class Location extends MongoObject {
 
     private String region;

@@ -1,8 +1,11 @@
 package com.tbisiar.bckt.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Entity;
 
 @Entity
+@Document(collection ="restriction")
 public class Restriction extends MongoObject {
 
     private String tide; //TODO: make this an enum

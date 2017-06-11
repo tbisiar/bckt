@@ -1,5 +1,7 @@
 package com.tbisiar.bckt.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
+@Document(collection ="bucket")
 public class Bucket extends MongoObject {
 
     private String content;

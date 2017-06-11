@@ -9,6 +9,8 @@ import com.tbisiar.bckt.domain.MongoObject;
 import com.tbisiar.bckt.domain.Photo;
 import com.tbisiar.bckt.domain.Restriction;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import java.util.Set;
 public class BucketService {
 
     private GenericDao repo;
+
+    private static Logger logger = LoggerFactory.getLogger(BucketService.class);
 
     public void createDemoBucket() {
         Drop demoRestaurantDrop = createDemoRestaurantDrop();

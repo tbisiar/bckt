@@ -1,9 +1,12 @@
 package com.tbisiar.bckt.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
+@Document(collection ="dropType")
 public class DropType extends MongoObject {
 
     public static final String RESTAURANT = "Restaurant";

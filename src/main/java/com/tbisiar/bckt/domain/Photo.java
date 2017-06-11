@@ -1,11 +1,14 @@
 package com.tbisiar.bckt.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Entity;
 
 /**
  * Created by tbis163 on 6/02/17.
  */
 @Entity
+@Document(collection ="photo")
 public class Photo extends MongoObject {
 
     private String source;

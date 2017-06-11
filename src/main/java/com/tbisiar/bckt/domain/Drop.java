@@ -1,5 +1,7 @@
 package com.tbisiar.bckt.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -7,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
+@Document(collection ="drop")
 public class Drop extends MongoObject {
 
     private String title;
