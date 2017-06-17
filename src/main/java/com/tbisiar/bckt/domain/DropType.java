@@ -6,26 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Document(collection ="dropType")
+@Document(collection = "dropType")
 public class DropType extends MongoObject {
 
     public static final String RESTAURANT = "Restaurant";
     public static final String ACTIVITY = "Activity";
     public static final String EVENT = "Event";
 
-    // Todo: make this a configurable list
-    // i.e. - Restaurant, Activity, Event, etc.
     private String type;
     @ManyToOne
     private Equipment equipment;
-    private int effortLevel; //TODO: make this an enum
-    private int skillLevel; //TODO: make this an enum
+    private int effortLevel;
+    private int skillLevel;
 
     // This constructor is required for JPA
-    protected DropType(){}
+    protected DropType() {
+    }
 
     public DropType(String type, Equipment equipment, int effortLevel, int skillLevel) {
-        // TODO: add check on String 'type'
         this.type = type;
         this.equipment = equipment;
         this.effortLevel = effortLevel;

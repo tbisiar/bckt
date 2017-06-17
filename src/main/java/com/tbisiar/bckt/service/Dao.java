@@ -1,6 +1,7 @@
 package com.tbisiar.bckt.service;
 
 import com.tbisiar.bckt.domain.MongoObject;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

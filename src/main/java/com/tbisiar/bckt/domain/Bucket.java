@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
-@Document(collection ="bucket")
+@Document(collection = "bucket")
 public class Bucket extends MongoObject {
 
     private String content;
@@ -17,7 +17,8 @@ public class Bucket extends MongoObject {
     private Set<Drop> drops = new HashSet<>();
 
     // This constructor is required for JPA
-    protected Bucket(){}
+    protected Bucket() {
+    }
 
     public Bucket(String content, Set<Drop> drops) {
         this.content = content;

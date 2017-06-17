@@ -4,17 +4,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BucketUtils {
+class BucketUtils {
 
-    private BucketUtils(){}
+    private BucketUtils() {
+    }
 
     // Based on https://stackoverflow.com/questions/2041778/how-to-initialize-hashset-values-by-construction
-    public static <T> Set<T> newHashSet(T... objs) {
-        Set<T> set = new HashSet<T>();
+    static <T> Set<T> newHashSet(T... objs) {
+        Set<T> set = new HashSet<>();
         set.addAll(Arrays.asList(objs));
-        for (T o : objs) {
-            set.add(o);
-        }
         return set;
     }
 }

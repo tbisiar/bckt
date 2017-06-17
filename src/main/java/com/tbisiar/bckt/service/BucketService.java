@@ -23,16 +23,17 @@ public class BucketService {
 
     private GenericDao repo;
 
-    private static Logger logger = LoggerFactory.getLogger(BucketService.class);
+    private static Logger log = LoggerFactory.getLogger(BucketService.class);
 
     public void createDemoBucket() {
-        Drop demoRestaurantDrop = createDemoRestaurantDrop();
-        Drop demoActivityDrop = createDemoActivityDrop();
+        log.debug("Creating demo buckets");
 
         Bucket demoBucket = new Bucket("Content", new HashSet<>());
 
-        demoBucket.addDrop(demoRestaurantDrop);
-        demoBucket.addDrop(demoActivityDrop);
+        demoBucket.addDrop(createDemoRestaurantDrop());
+        demoBucket.addDrop(createDemoActivityDrop());
+        demoBucket.addDrop(createDemoEventDrop());
+
         repo.save(demoBucket);
     }
 
@@ -40,9 +41,8 @@ public class BucketService {
         Set<Photo> photoSet = new HashSet<>();
         Photo photo = new Photo(
                 "../image/dinner.jpg",
-                "Terry Bisiar",
+                "Jamie Bisiar",
                 1);
-        repo.save(photo);
         photoSet.add(photo);
 
         Location location = new Location(
@@ -52,14 +52,12 @@ public class BucketService {
                 "52 Tyler St, Auckland, 1010, New Zealand",
                 "Enter from Tyler or Quay Street and proceed to level 2 via elevator or stairs",
                 true);
-        repo.save(location);
 
         DropType dropType = new DropType(
                 "Restaurant",
                 null,
                 4,
                 8);
-        repo.save(dropType);
 
         Set<Restriction> restrictionSet = new HashSet<>();
         Restriction restriction = new Restriction(
@@ -68,18 +66,15 @@ public class BucketService {
                 null,
                 null,
                 "1-2 hrs");
-        repo.save(restriction);
         restrictionSet.add(restriction);
 
-        Drop drop = new Drop(
+        return new Drop(
                 "Ostro Brasserie & Bar",
                 "Sleek, modern place offering inventive NZ cuisine, cocktails & panoramic views of Waitemata Harbour. - Google",
                 photoSet,
                 location,
                 dropType,
                 restrictionSet);
-        repo.save(drop);
-        return drop;
     }
 
     private Drop createDemoActivityDrop() {
@@ -88,7 +83,6 @@ public class BucketService {
                 "../image/waipuCaves.jpg",
                 "Terry Bisiar",
                 1);
-        repo.save(photo);
         photoSet.add(photo);
 
         Location location = new Location(
@@ -98,19 +92,16 @@ public class BucketService {
                 null,
                 "The track starts at the Whangarei District Council reserve, by the cave's entrance, off Waipu Caves Road. There is a large flat area suitable for picnics and a Whangarei District Council administered public toilet at this point. Note: the entrance to the caves is directly across the Council Reserve before the track starts. Look across the large flat grassed area for the orange post, which indicates the start of the track.",
                 true);
-        repo.save(location);
 
         Equipment equipment = new Equipment(
                 "Jandals",
                 "Protect you feet while allowing them to get wet!");
-        repo.save(equipment);
 
         DropType dropType = new DropType(
-                "Activity",
+                DropType.ACTIVITY,
                 equipment,
                 4,
                 5);
-        repo.save(dropType);
 
         Set<Restriction> restrictionSet = new HashSet<>();
         Restriction restriction = new Restriction(
@@ -119,18 +110,48 @@ public class BucketService {
                 null,
                 null,
                 "1-2 hrs");
-        repo.save(restriction);
         restrictionSet.add(restriction);
 
-        Drop drop = new Drop(
+        return new Drop(
                 "Waipu Caves",
                 "Get lost in some unbelievable glow worm caves",
                 photoSet,
                 location,
                 dropType,
                 restrictionSet);
-        repo.save(drop);
-        return drop;
+    }
+
+    private Drop createDemoEventDrop() {
+    // save a photo
+    Photo demoPhoto1 = new Photo(
+            "../image/laneway2017.jpg",
+            "Terry Bisiar",
+            0);
+
+    // save a location
+    Location demoLocation1 = new Location(
+            "Albert Park",
+            -36.8518108,
+            174.7688307,
+            "N/A",
+            null,
+            false);
+
+    // save a dropType
+    DropType demoDropType1 = new DropType(
+            DropType.EVENT,
+            null,
+            4,
+            2);
+
+    // save a drop
+    return new Drop(
+            "Laneway Festival",
+            "Hipster music festival originating in Australia",
+            BucketUtils.newHashSet(demoPhoto1),
+            demoLocation1,
+            demoDropType1,
+            null);
     }
 
     boolean checkBucket(String type) {
@@ -138,6 +159,7 @@ public class BucketService {
     }
 
     public List<MongoObject> loadBucketsForUser(long userId) {
+        log.debug("Loading buckets for {}", userId);
         return repo.findAll();
     }
 

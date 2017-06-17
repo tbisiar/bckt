@@ -5,16 +5,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Entity;
 
 @Entity
-@Document(collection ="restriction")
+@Document(collection = "restriction")
 public class Restriction extends MongoObject {
 
-    private String tide; //TODO: make this an enum
-    private String season; //TODO: make this an enum
-    private String timeOfDay; //TODO: make this an enum
-    private String weather; //TODO: make this an enum
-    private String duration; //TODO: make this an enum
+    private String tide;
+    private String season;
+    private String timeOfDay;
+    private String weather;
+    private String duration;
 
-    protected Restriction(){}
+    protected Restriction() {
+    }
 
     public Restriction(String tide, String season, String timeOfDay, String weather, String duration) {
         this.tide = tide;

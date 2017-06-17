@@ -5,13 +5,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Entity;
 
 @Entity
-@Document(collection ="equipment")
+@Document(collection = "equipment")
 public class Equipment extends MongoObject {
 
     private String title;
     private String description;
 
-    protected Equipment(){}
+    protected Equipment() {
+    }
 
     public Equipment(String title, String description) {
         this.title = title;

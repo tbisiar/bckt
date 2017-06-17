@@ -4,18 +4,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Entity;
 
-/**
- * Created by tbis163 on 6/02/17.
- */
 @Entity
-@Document(collection ="photo")
+@Document(collection = "photo")
 public class Photo extends MongoObject {
 
     private String source;
     private String photoCredit;
     private int displayOrder;
 
-    protected Photo(){}
+    protected Photo() {
+    }
 
     public Photo(String source, String photoCredit, int displayOrder) {
         this.source = source;
