@@ -2,8 +2,6 @@ package com.tbisiar.bckt.domain;
 
 import org.joda.time.DateTime;
 
-import java.util.Set;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,12 +16,18 @@ public class MongoObject {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public String id;
 
-    DateTime createDate;
-    DateTime updateDate;
+    public DateTime createDate;
+    public DateTime updateDate;
 
-    String title;
-    String description;
-    Set<Tag> tags;
+    public String title;
+    public String description;
+
+    MongoObject() {}
+
+    MongoObject(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 
     @PrePersist
     protected void onCreate() {

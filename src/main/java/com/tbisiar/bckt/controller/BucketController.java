@@ -19,9 +19,15 @@ public class BucketController {
 
     @CrossOrigin(origins = "http://localhost:63342")
     @RequestMapping(value = "/bucket", method = RequestMethod.GET)
-    public List<MongoObject> greeting(@RequestParam(value = "name", defaultValue = "World") Long userId) {
+    public List<MongoObject> greeting(@RequestParam(value = "userId", defaultValue = "NoneProvided") Long userId) {
         bucketService.createDemoBucket();
         return bucketService.loadBucketsForUser(userId);
+    }
+
+    @CrossOrigin(origins = "http://localhost:63342")
+    @RequestMapping(value = "/buckets/format", method = RequestMethod.GET)
+    public void reformatDB(@RequestParam(value = "userId") Long userId) {
+        bucketService.reformatDB(userId);
     }
 
     @Autowired

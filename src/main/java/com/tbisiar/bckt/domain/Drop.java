@@ -13,8 +13,6 @@ import javax.persistence.OneToOne;
 @Document(collection = "drop")
 public class Drop extends MongoObject {
 
-    private String title;
-    private String description;
     @OneToMany
     private Set<Photo> photo;
     @OneToOne

@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 @Document(collection = "equipment")
 public class Equipment extends MongoObject {
 
-    private String title;
-    private String description;
-
     protected Equipment() {
     }
 

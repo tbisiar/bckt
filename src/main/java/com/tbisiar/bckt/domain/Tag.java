@@ -1,9 +1,14 @@
 package com.tbisiar.bckt.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
+@Document(collection = "tag")
 public class Tag {
 
     @Id

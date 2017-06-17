@@ -6,13 +6,15 @@ import java.util.Set;
 
 class BucketUtils {
 
-    private BucketUtils() {
-    }
+    private BucketUtils(){}
 
     // Based on https://stackoverflow.com/questions/2041778/how-to-initialize-hashset-values-by-construction
     static <T> Set<T> newHashSet(T... objs) {
         Set<T> set = new HashSet<>();
-        set.addAll(Arrays.asList(objs));
+//        set.addAll(Arrays.asList(objs));
+        for (T o : objs) {
+            set.add(o);
+        }
         return set;
     }
 }

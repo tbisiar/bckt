@@ -28,7 +28,10 @@ public class BucketService {
     public void createDemoBucket() {
         log.debug("Creating demo buckets");
 
-        Bucket demoBucket = new Bucket("Content", new HashSet<>());
+        Bucket demoBucket = new Bucket(
+                "Demo Bucket",
+                "This is an example of a mixed content bucket containing Restaurants, Activities, and Events",
+                new HashSet<>());
 
         demoBucket.addDrop(createDemoRestaurantDrop());
         demoBucket.addDrop(createDemoActivityDrop());
@@ -37,7 +40,15 @@ public class BucketService {
         repo.save(demoBucket);
     }
 
-    private Drop createDemoRestaurantDrop() {
+    public void reformatDB(Long userId) {
+        if (userId != null) {
+            repo.delete(userId);
+        } else {
+            repo.deleteAll();
+        }
+    }
+
+    private static Drop createDemoRestaurantDrop() {
         Set<Photo> photoSet = new HashSet<>();
         Photo photo = new Photo(
                 "../image/dinner.jpg",
@@ -77,7 +88,7 @@ public class BucketService {
                 restrictionSet);
     }
 
-    private Drop createDemoActivityDrop() {
+    private static Drop createDemoActivityDrop() {
         Set<Photo> photoSet = new HashSet<>();
         Photo photo = new Photo(
                 "../image/waipuCaves.jpg",
@@ -121,37 +132,37 @@ public class BucketService {
                 restrictionSet);
     }
 
-    private Drop createDemoEventDrop() {
-    // save a photo
-    Photo demoPhoto1 = new Photo(
-            "../image/laneway2017.jpg",
-            "Terry Bisiar",
-            0);
+    private static Drop createDemoEventDrop() {
+        // save a photo
+        Photo demoPhoto1 = new Photo(
+                "../image/laneway2017.jpg",
+                "Terry Bisiar",
+                0);
 
-    // save a location
-    Location demoLocation1 = new Location(
-            "Albert Park",
-            -36.8518108,
-            174.7688307,
-            "N/A",
-            null,
-            false);
+        // save a location
+        Location demoLocation1 = new Location(
+                "Albert Park",
+                -36.8518108,
+                174.7688307,
+                "N/A",
+                null,
+                false);
 
-    // save a dropType
-    DropType demoDropType1 = new DropType(
-            DropType.EVENT,
-            null,
-            4,
-            2);
+        // save a dropType
+        DropType demoDropType1 = new DropType(
+                DropType.EVENT,
+                null,
+                4,
+                2);
 
-    // save a drop
-    return new Drop(
-            "Laneway Festival",
-            "Hipster music festival originating in Australia",
-            BucketUtils.newHashSet(demoPhoto1),
-            demoLocation1,
-            demoDropType1,
-            null);
+        // save a drop
+        return new Drop(
+                "Laneway Festival",
+                "Hipster music festival originating in Australia",
+                BucketUtils.newHashSet(demoPhoto1),
+                demoLocation1,
+                demoDropType1,
+                null);
     }
 
     boolean checkBucket(String type) {
