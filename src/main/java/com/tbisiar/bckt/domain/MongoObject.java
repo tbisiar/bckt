@@ -21,12 +21,14 @@ public class MongoObject {
 
     public String title;
     public String description;
+    public String owner;
 
     MongoObject() {}
 
-    MongoObject(String title, String description) {
+    MongoObject(String title, String description, String owner) {
         this.title = title;
         this.description = description;
+        this.owner = owner;
     }
 
     @PrePersist

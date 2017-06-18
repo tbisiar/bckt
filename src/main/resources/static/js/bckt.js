@@ -16,7 +16,7 @@ $("#search-form").submit(function (event) {
 
 function load_bucket(path) {
     $.ajax({
-               url: path + "/bucket",
+               url: path + "/buckets?userId=tbisiar",
                type: 'GET',
                dataType: 'json',
                success: function(data) {

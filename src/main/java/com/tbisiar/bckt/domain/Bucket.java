@@ -20,8 +20,8 @@ public class Bucket extends MongoObject {
     protected Bucket() {
     }
 
-    public Bucket(String title, String description, Set<Drop> drops) {
-        super(title, description);
+    public Bucket(String title, String description, Set<Drop> drops, String owner) {
+        super(title, description, owner);
         this.drops = drops;
     }
 

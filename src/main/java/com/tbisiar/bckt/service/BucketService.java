@@ -12,6 +12,10 @@ import com.tbisiar.bckt.domain.Restriction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Field;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -22,6 +26,7 @@ import java.util.Set;
 public class BucketService {
 
     private GenericDao repo;
+    private MongoTemplate mongoTemplate;
 
     private static Logger log = LoggerFactory.getLogger(BucketService.class);
 
@@ -31,7 +36,8 @@ public class BucketService {
         Bucket demoBucket = new Bucket(
                 "Demo Bucket",
                 "This is an example of a mixed content bucket containing Restaurants, Activities, and Events",
-                new HashSet<>());
+                new HashSet<>(),
+                "tbisiar");
 
         demoBucket.addDrop(createDemoRestaurantDrop());
         demoBucket.addDrop(createDemoActivityDrop());
@@ -169,14 +175,21 @@ public class BucketService {
         return DropType.RESTAURANT.equals(type);
     }
 
-    public List<MongoObject> loadBucketsForUser(long userId) {
+    public List<MongoObject> loadBucketsForUser(String userId) {
         log.debug("Loading buckets for {}", userId);
-        return repo.findAll();
+        Query query = new Query(Criteria.where("owner").is(userId).andOperator(Criteria.where("_class").is("com.tbisiar.bckt.domain.Bucket")));
+//        Field field = New Field();
+        return mongoTemplate.find(query, MongoObject.class);
     }
 
     @Autowired
     public void setRepo(GenericDao genericDao) {
         this.repo = genericDao;
+    }
+
+    @Autowired
+    public void setMongoTemplate(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
     }
 
 }
