@@ -15,7 +15,7 @@ public class Photo extends MongoObject {
     protected Photo() {
     }
 
-    public Photo(String source, String photoCredit, int displayOrder) {
+    public Photo(String title, String description, String source, String photoCredit, int displayOrder) {
         this.source = source;
         this.photoCredit = photoCredit;
         this.displayOrder = displayOrder;

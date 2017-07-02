@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Field;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +56,8 @@ public class BucketService {
     private static Drop createDemoRestaurantDrop() {
         Set<Photo> photoSet = new HashSet<>();
         Photo photo = new Photo(
+                "Dinner picture",
+                "Picture from Dinner",
                 "../image/dinner.jpg",
                 "Jamie Bisiar",
                 1);
@@ -97,6 +98,8 @@ public class BucketService {
     private static Drop createDemoActivityDrop() {
         Set<Photo> photoSet = new HashSet<>();
         Photo photo = new Photo(
+                "Waipu Caves",
+                "This picture was taken at Waipu Caves",
                 "../image/waipuCaves.jpg",
                 "Terry Bisiar",
                 1);
@@ -141,6 +144,8 @@ public class BucketService {
     private static Drop createDemoEventDrop() {
         // save a photo
         Photo demoPhoto1 = new Photo(
+                "Laneway 2017",
+                "This photo was taken at Laneway 2017",
                 "../image/laneway2017.jpg",
                 "Terry Bisiar",
                 0);
@@ -178,7 +183,6 @@ public class BucketService {
     public List<MongoObject> loadBucketsForUser(String userId) {
         log.debug("Loading buckets for {}", userId);
         Query query = new Query(Criteria.where("owner").is(userId).andOperator(Criteria.where("_class").is("com.tbisiar.bckt.domain.Bucket")));
-//        Field field = New Field();
         return mongoTemplate.find(query, MongoObject.class);
     }
 

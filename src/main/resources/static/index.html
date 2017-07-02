@@ -52,6 +52,7 @@
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="#create">Create</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Dropdown <span
@@ -74,6 +75,62 @@
     </div>
 </div>
 
+<!-- Create -->
+<div class="jumbotron">
+    <a id="create"></a>
+    <h1 class="display-2">Create a new Bucket</h1>
+    <p class="lead">Fill out the following fields</p>
+    <fieldset>
+        <legend>Buckets</legend>
+        <form>
+            <label for="bucketSelect">Select a bucket to edit</label>
+            <select id="bucketSelect"><option>Create New</option></select>
+            <label for="bucketTitle">Bucket Title</label>
+            <input id="bucketTitle" placeholder="Bucket Title" type="text">
+            <label for="bucketDescription">Bucket Description</label>
+            <input id="bucketDescription" placeholder="Bucket Description" type="text">
+            <!-- Add ability to add / remove drops -->
+
+            <button type="submit">Save Bucket</button>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Drops</legend>
+        <form>
+            <label for="editDrop">Select a drop to edit</label>
+            <select id="editDrop"><option>Create New</option></select>
+            <label for="dropTitle">Drop Title</label>
+            <input id="dropTitle" placeholder="Drop Title" type="text">
+            <label for="dropDescription">Drop Description</label>
+            <input id="dropDescription" placeholder="Drop Description" type="text">
+            <label for="selectDropType">Select a drop type</label>
+            <select id="selectDropType">
+                <option>Activity</option>
+                <option>Event</option>
+                <option>Restaurant</option>
+            </select>
+            <!-- Add ability to add / remove photos, location, restriction -->
+
+            <button type="submit">Save Drop</button>
+        </form>
+    </fieldset>
+    <form>
+        <button class="btn btn-primary btn-lg" type="button" id="createDemoBucket">Create Demo
+            bucket
+        </button>
+        <button class="btn btn-primary btn-lg" type="button" id="deleteAllBuckets">Delete All
+            Buckets
+        </button>
+    </form>
+    <!--
+    To Do:
+    - Add ability to edit bucket (edit name, add drops)
+    - Add ability to edit drop (edit name, add photos, location,
+
+    -->
+</div>
+
+<!-- Intro -->
 <div class="jumbotron">
     <h1 class="display-3">Welcome to BuckeT</h1>
     <p>Bucket is an application to track your lists of places to visit. You can make notes for
@@ -100,6 +157,7 @@
     </div>
 </div>
 
+<!-- Buckets -->
 <div id="bucket-container" class="row">
     <!--div class="row">
         <div class="col-md-12">
@@ -159,6 +217,8 @@
         </div>
     </div-->
 </div>
+
+<!-- About -->
 <div class="container">
     <div class="jumbotron">
         <a id="about"></a>
@@ -192,28 +252,16 @@
     </div>
 </div>
 
+<!-- Contact -->
 <div class="container">
     <div class="jumbotron">
         <a id="contact"></a>
         <h1 class="display-2">Contact</h1>
         <p class="lead">Please contact me via email at <a href="mailto:tbisiar@gmail.com"
-                                                          Subject=Hello%20again" target="_top">tbisiar@gmail.com</a>
+                                                          target="_top">tbisiar@gmail.com</a>
         </p>
-    </div>
-    <div class="jumbotron">
-        <a id="createBucket"></a>
-        <h1 class="display-2">Create a new Bucket</h1>
-        <p class="lead">Fill out the following fields</p>
-        <form>
-            <select id="editBucket"></select>
-            <input id="bucketName" placeholder="Enter name of bucket" type="text">
-            <label>Bucket Name</label>
-            <input id="addDrop" placeholder="Enter name of drop" type=""
-            <button type="submit">Save</button>
-        </form>
     </div>
 </div>
 
-</div>
 </body>
 </html>
