@@ -16,12 +16,12 @@ public class MongoObject {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public String id;
 
-    public DateTime createDate;
-    public DateTime updateDate;
+    private DateTime createDate;
+    private DateTime updateDate;
 
-    public String title;
-    public String description;
-    public String owner;
+    String title;
+    String description;
+    String owner;
 
     MongoObject() {}
 
@@ -41,4 +41,11 @@ public class MongoObject {
         updateDate = new DateTime();
     }
 
+    public DateTime getCreateDate() {
+        return createDate;
+    }
+
+    public DateTime getUpdateDate() {
+        return updateDate;
+    }
 }

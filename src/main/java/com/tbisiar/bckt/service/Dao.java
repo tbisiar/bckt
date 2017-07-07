@@ -1,12 +1,10 @@
 package com.tbisiar.bckt.service;
 
-import com.tbisiar.bckt.domain.Bucket;
 import com.tbisiar.bckt.domain.MongoObject;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import java.util.List;
 
 /*
 Based on solution from stackoverflow: https://stackoverflow.com/questions/42831907/spring-boot-how-to-avoid-too-many-jpa-repositories-for-each-domain-class#

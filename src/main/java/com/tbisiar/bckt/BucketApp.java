@@ -1,5 +1,6 @@
 package com.tbisiar.bckt;
 
+import com.tbisiar.bckt.domain.MongoObject;
 import com.tbisiar.bckt.service.BucketService;
 import com.tbisiar.bckt.service.GenericDao;
 
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.List;
 
 
 @SpringBootApplication
@@ -26,7 +29,10 @@ public class BucketApp implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.debug("Running BucketApp with repo {}", repo);
-        bucketService.createDemoBucket();
+        List<MongoObject> bucketList = bucketService.loadBucketsForUser("tbisiar");
+        if(bucketList.isEmpty()) {
+            bucketService.createDemoBucket();
+        }
     }
 
     @Autowired

@@ -3,26 +3,32 @@
  * Created by tbis163 on 6/02/17.
  */
 var url_base = 'http://localhost:8080';
-var user_id = 'tbisiar;';
+var user_id = 'tbisiar';
 // Load the bucket once the page has loaded
-// $(load_bucket(url_base));
+$(load_buckets(url_base, user_id));
 
 // Create bucket when create demo bucket button clicked
 $(function () {
     // Initialize bucket fields
-    $(load_bucket(url_base));
+    // $(load_buckets(url_base, user_id));
 
-    $("#bucketSelect").change(function() {
+    $("#bucketSelect").change(function () {
         $("#bucketTitle").val(this.value);
         $("#bucketDescription").val(this.value);
     });
 
     // Initialize buttons to create & delete buckets
     $("#createDemoBucket").click(function () {
-        create_demo_bucket(url_base, user_id);
+        create_demo_bucket(url_base);
     });
     $("#deleteAllBuckets").click(function () {
         delete_buckets(url_base, user_id);
+    });
+
+    // Initialize buttons to save or delete
+    $("#saveBucket").click(function (e) {
+        e.preventDefault();
+        save_bucket(url_base, user_id);
     });
 
     // Reload bucket when clicking button
@@ -63,6 +69,24 @@ function show_bucket(data) {
             $("#bucket-container").append(overview_card);
         })
     });
+}
+
+function save_bucket(path, user_id) {
+    var title = $("#bucketTitle").val();
+    var description = $("#bucketDescription").val();
+    $.ajax({
+               url: path + '/buckets/saveBucket?userId=' + user_id,
+               type: 'POST',
+               dataType: 'json',
+               data: '{"title": "' + title + '", "description": "' + description + '"}',
+               contentType: 'application/json',
+               success: function (data) {
+                   show_bucket(data);
+                   populate_dropdown(data);
+               },
+               error: show_error('The bucket could not be saved at path ' + path)
+           })
+    ;
 }
 
 function show_error(error_msg) {
