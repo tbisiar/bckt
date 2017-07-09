@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 @Document(collection = "bucket")
 public class Bucket extends MongoObject {
 
-    private String content;
     @OneToMany
     private Set<Drop> drops = new HashSet<>();
 
@@ -23,10 +22,6 @@ public class Bucket extends MongoObject {
     public Bucket(String title, String description, Set<Drop> drops, String owner) {
         super(title, description, owner);
         this.drops = drops;
-    }
-
-    public String getContent() {
-        return content;
     }
 
     public Set<Drop> getDrops() {
@@ -41,4 +36,13 @@ public class Bucket extends MongoObject {
         drops.remove(drop);
     }
 
+    @Override
+    public String toString() {
+        return "Bucket: {" +
+                " \r\n title: " + title +
+                ", \r\n description: " + description +
+                ", \r\n owner: " + owner +
+                ", \r\n drops: " + drops +
+                " \r\n }";
+    }
 }

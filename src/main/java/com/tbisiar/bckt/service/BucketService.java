@@ -28,9 +28,9 @@ public class BucketService {
         repo.save(demoBucket);
     }
 
-    public void reformatDB(Long userId) {
+    public void reformatDB(String userId) {
         if (userId != null) {
-            repo.delete(userId);
+            repo.delete(Long.valueOf(userId));
         } else {
             repo.deleteAll();
         }
@@ -40,14 +40,24 @@ public class BucketService {
         return DropType.RESTAURANT.equals(type);
     }
 
-    public List<MongoObject> loadBucketsForUser(String userId) {
+    public List<Bucket> loadBucketsForUser(String userId) {
         log.debug("Loading buckets for {}", userId);
-        Query query = new Query(Criteria.where("owner").is(userId).andOperator(Criteria.where("_class").is("com.tbisiar.bckt.domain.Bucket")));
-        return mongoTemplate.find(query, MongoObject.class);
+        Query query = new Query(Criteria.where("owner").is(userId));
+        List<Bucket> buckets = mongoTemplate.find(query, Bucket.class);
+        log.debug("Found {} buckets: {}", buckets.size(), buckets);
+        return buckets;
     }
 
-    public void saveBucket(String userId, Bucket bucket) {
-        log.debug("Saving bucket {} for {}", bucket, userId);
+    public List<Bucket> loadBucketById(String userId, String bucketId) {
+        log.debug("Loading bucket for id {}", bucketId);
+        Query query = new Query(Criteria.where("owner").is(userId).andOperator(Criteria.where("_id").is(bucketId)));
+        List<Bucket> buckets = mongoTemplate.find(query, Bucket.class);
+        log.debug("Found {} buckets: {}", buckets.size(), buckets);
+        return buckets;
+    }
+
+    public void saveBucket(Bucket bucket) {
+        log.debug("Saving bucket {}", bucket);
         mongoTemplate.save(bucket);
     }
 

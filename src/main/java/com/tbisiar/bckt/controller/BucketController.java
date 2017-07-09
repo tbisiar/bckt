@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tbisiar.bckt.domain.Bucket;
-import com.tbisiar.bckt.domain.MongoObject;
 import com.tbisiar.bckt.service.BucketService;
+import com.tbisiar.bckt.service.DemoUtils;
 
 @RestController
 public class BucketController {
@@ -27,31 +28,40 @@ public class BucketController {
 
     @CrossOrigin(origins = CROSS_ORIGIN_URI)
     @RequestMapping(value = "/buckets", method = RequestMethod.GET)
-    public List<MongoObject> loadBuckets(@RequestParam(value = "userId", defaultValue = "NoneProvided") String userId) {
-        List<MongoObject> buckets = bucketService.loadBucketsForUser(userId);
+    public List<Bucket> loadBuckets(@RequestParam(value = "userId") String userId,
+                                    @RequestParam(value = "bucketId", required = false) String bucketId) {
+        List<Bucket> buckets;
+        if(bucketId != null) {
+            buckets = bucketService.loadBucketById(userId, bucketId);
+        } else {
+            buckets = bucketService.loadBucketsForUser(userId);
+        }
         log.info("{} buckets loaded for {}", buckets.size(), userId);
         return buckets;
     }
 
     @CrossOrigin(origins = CROSS_ORIGIN_URI)
     @RequestMapping(value = "/buckets/createDemoBucket", method = RequestMethod.GET)
-    public List<MongoObject> createDemoBucket(@RequestParam(value = "userId", defaultValue = "NoneProvided") String userId) {
+    public List<Bucket> createDemoBucket(@RequestParam(value = "userId", defaultValue = "NoneProvided") String userId) {
         bucketService.createDemoBucket();
-        List<MongoObject> buckets = bucketService.loadBucketsForUser(userId);
+        List<Bucket> buckets = bucketService.loadBucketsForUser(userId);
         log.info("{} buckets loaded for {}", buckets.size(), userId);
         return buckets;
     }
 
     @CrossOrigin(origins = CROSS_ORIGIN_URI)
     @RequestMapping(value = "/buckets/format", method = RequestMethod.GET)
-    public void reformatDB(@RequestParam(value = "userId") Long userId) {
+    public void reformatDB(@RequestParam(value = "userId") String userId) {
         bucketService.reformatDB(userId);
     }
 
+    @ResponseBody
     @CrossOrigin(origins = "http://localhost:63342")
     @RequestMapping(value = "/buckets/saveBucket", method = RequestMethod.POST)
-    public List<MongoObject> saveBucket(@RequestParam(value = "userId") String userId, @RequestBody Bucket bucket) {
-        bucketService.saveBucket(userId, bucket);
+    public List<Bucket> saveBucket(@RequestBody Bucket bucket) { //@RequestParam(value = "userId") String userId,
+        String userId = DemoUtils.DEMO_USER_ID;
+        bucket.setOwner(userId);
+        bucketService.saveBucket(bucket);
         return bucketService.loadBucketsForUser(userId);
     }
 

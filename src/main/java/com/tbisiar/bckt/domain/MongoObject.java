@@ -23,7 +23,8 @@ public class MongoObject {
     String description;
     String owner;
 
-    MongoObject() {}
+    MongoObject() {
+    }
 
     MongoObject(String title, String description, String owner) {
         this.title = title;
@@ -47,5 +48,29 @@ public class MongoObject {
 
     public DateTime getUpdateDate() {
         return updateDate;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }

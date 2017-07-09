@@ -11,7 +11,9 @@ import com.tbisiar.bckt.domain.Restriction;
 import java.util.HashSet;
 import java.util.Set;
 
-class DemoUtils {
+public class DemoUtils {
+
+    public static final String DEMO_USER_ID = "tbisiar";
 
     private DemoUtils(){}
 
@@ -20,7 +22,7 @@ class DemoUtils {
                 "Demo Bucket",
                 "This is an example of a mixed content bucket containing Restaurants, Activities, and Events",
                 new HashSet<>(),
-                "tbisiar");
+                DEMO_USER_ID);
 
         demoBucket.addDrop(createDemoRestaurantDrop());
         demoBucket.addDrop(createDemoActivityDrop());

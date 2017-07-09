@@ -58,4 +58,17 @@ public class Drop extends MongoObject {
     public Set<Restriction> getRestrictions() {
         return restrictions;
     }
+
+    @Override
+    public String toString() {
+        return "Drop: {" +
+                " \r\n title: " + title +
+                ", \r\n description: " + description +
+                ", \r\n owner: " + owner +
+                ", \r\n photo: " + photo +
+                ", \r\n location " + location +
+                ", \r\n dropType: " + dropType +
+                ", \r\n restrictions: " + restrictions +
+                " \r\n }";
+    }
 }
