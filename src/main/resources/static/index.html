@@ -84,21 +84,27 @@
         <legend>Buckets</legend>
         <form>
             <label for="bucketSelect">Select a bucket to edit</label>
-            <select id="bucketSelect"><option>Create New</option></select>
+            <select id="bucketSelect">
+                <option>Create New</option>
+            </select>
+            <input id="bucketId" type="hidden"/>
             <label for="bucketTitle">Bucket Title</label>
             <input id="bucketTitle" placeholder="Bucket Title" type="text">
             <label for="bucketDescription">Bucket Description</label>
             <input id="bucketDescription" placeholder="Bucket Description" type="text">
             <!-- Add ability to add / remove drops -->
 
-            <button id="saveBucket" type="submit">Save Bucket</button>
+            <button id="saveBucket" type="submit" disabled>Save Bucket</button>
+            <button id="deleteBucket" type="submit" disabled>Delete Bucket</button>
         </form>
     </fieldset>
     <fieldset>
         <legend>Drops</legend>
         <form>
             <label for="editDrop">Select a drop to edit</label>
-            <select id="editDrop"><option>Create New</option></select>
+            <select id="editDrop">
+                <option>Create New</option>
+            </select>
             <label for="dropTitle">Drop Title</label>
             <input id="dropTitle" placeholder="Drop Title" type="text">
             <label for="dropDescription">Drop Description</label>

@@ -39,7 +39,8 @@ public class Bucket extends MongoObject {
     @Override
     public String toString() {
         return "Bucket: {" +
-                " \r\n title: " + title +
+                " \r\n id: " + id +
+                ", \r\n title: " + title +
                 ", \r\n description: " + description +
                 ", \r\n owner: " + owner +
                 ", \r\n drops: " + drops +

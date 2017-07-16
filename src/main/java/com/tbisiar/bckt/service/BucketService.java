@@ -2,7 +2,6 @@ package com.tbisiar.bckt.service;
 
 import com.tbisiar.bckt.domain.Bucket;
 import com.tbisiar.bckt.domain.DropType;
-import com.tbisiar.bckt.domain.MongoObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,8 @@ import java.util.List;
 
 @Service
 public class BucketService {
+
+    private static final String OWNER = "owner";
 
     private GenericDao repo;
     private MongoTemplate mongoTemplate;
@@ -42,7 +43,7 @@ public class BucketService {
 
     public List<Bucket> loadBucketsForUser(String userId) {
         log.debug("Loading buckets for {}", userId);
-        Query query = new Query(Criteria.where("owner").is(userId));
+        Query query = new Query(Criteria.where(OWNER).is(userId));
         List<Bucket> buckets = mongoTemplate.find(query, Bucket.class);
         log.debug("Found {} buckets: {}", buckets.size(), buckets);
         return buckets;
@@ -50,7 +51,7 @@ public class BucketService {
 
     public List<Bucket> loadBucketById(String userId, String bucketId) {
         log.debug("Loading bucket for id {}", bucketId);
-        Query query = new Query(Criteria.where("owner").is(userId).andOperator(Criteria.where("_id").is(bucketId)));
+        Query query = new Query(Criteria.where(OWNER).is(userId).andOperator(Criteria.where("_id").is(bucketId)));
         List<Bucket> buckets = mongoTemplate.find(query, Bucket.class);
         log.debug("Found {} buckets: {}", buckets.size(), buckets);
         return buckets;
@@ -59,6 +60,12 @@ public class BucketService {
     public void saveBucket(Bucket bucket) {
         log.debug("Saving bucket {}", bucket);
         mongoTemplate.save(bucket);
+    }
+
+    public void deleteBucket(String userId, String bucketId) {
+        Query query = new Query(Criteria.where(OWNER).is(userId).andOperator(Criteria.where("_id").is(bucketId)));
+        Bucket bucket = mongoTemplate.findAndRemove(query, Bucket.class);
+        log.debug("Deleted bucket {}", bucket);
     }
 
     @Autowired

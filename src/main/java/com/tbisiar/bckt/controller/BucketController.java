@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +32,7 @@ public class BucketController {
     public List<Bucket> loadBuckets(@RequestParam(value = "userId") String userId,
                                     @RequestParam(value = "bucketId", required = false) String bucketId) {
         List<Bucket> buckets;
-        if(bucketId != null) {
+        if (bucketId != null) {
             buckets = bucketService.loadBucketById(userId, bucketId);
         } else {
             buckets = bucketService.loadBucketsForUser(userId);
@@ -60,15 +61,19 @@ public class BucketController {
     @RequestMapping(value = "/buckets/saveBucket", method = RequestMethod.POST)
     public List<Bucket> saveBucket(@RequestBody Bucket bucket) { //@RequestParam(value = "userId") String userId,
         String userId = DemoUtils.DEMO_USER_ID;
-        bucket.setOwner(userId);
-        bucketService.saveBucket(bucket);
+        if (bucket.id.isEmpty()) {
+            bucket.setOwner(userId);
+            bucketService.saveBucket(bucket);
+        }
         return bucketService.loadBucketsForUser(userId);
     }
 
-    // TODO: implement account validation per: https://spring.io/guides/tutorials/bookmarks/
-    private void validateUser(String userId) {
-//        this.accountRepository.findByUsername(userId).orElseThrow(
-//                () -> new UserNotFoundException(userId));
+    @CrossOrigin(origins = "http://localhost:63342")
+    @RequestMapping(value = "/buckets/format/{bucketId}", method = RequestMethod.DELETE)
+    public List<Bucket> deleteBucket(@PathVariable String bucketId, @RequestParam(value = "userId") String userId) {
+        String demoUserId = DemoUtils.DEMO_USER_ID;
+        bucketService.deleteBucket(demoUserId, bucketId);
+        return bucketService.loadBucketsForUser(demoUserId);
     }
 
     @Autowired

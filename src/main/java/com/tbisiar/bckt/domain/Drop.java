@@ -35,14 +35,6 @@ public class Drop extends MongoObject {
         this.restrictions = restrictions;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public Set<Photo> getPhoto() {
         return photo;
     }
@@ -62,7 +54,8 @@ public class Drop extends MongoObject {
     @Override
     public String toString() {
         return "Drop: {" +
-                " \r\n title: " + title +
+                " \r\n id: " + id +
+                ", \r\n title: " + title +
                 ", \r\n description: " + description +
                 ", \r\n owner: " + owner +
                 ", \r\n photo: " + photo +
