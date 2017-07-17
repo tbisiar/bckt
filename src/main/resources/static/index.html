@@ -93,7 +93,10 @@
             <label for="bucketDescription">Bucket Description</label>
             <input id="bucketDescription" placeholder="Bucket Description" type="text">
             <!-- Add ability to add / remove drops -->
-
+            <select id="bucketDropSelect">
+                <option>No Drops Available</option>
+            </select>
+            <ul id="bucketDropList"></ul>
             <button id="saveBucket" type="submit" disabled>Save Bucket</button>
             <button id="deleteBucket" type="submit" disabled>Delete Bucket</button>
         </form>

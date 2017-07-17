@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-class BucketUtils {
+public class BucketUtils {
+    public static final String CROSS_ORIGIN_URI = "http://localhost:63342";
+    public static final String OWNER = "owner";
 
     private BucketUtils(){}
 

@@ -17,17 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tbisiar.bckt.domain.Bucket;
 import com.tbisiar.bckt.service.BucketService;
 import com.tbisiar.bckt.service.DemoUtils;
+import com.tbisiar.bckt.service.BucketUtils;
 
 @RestController
 public class BucketController {
 
     private static final Logger log = LoggerFactory.getLogger(BucketController.class);
 
-    private static final String CROSS_ORIGIN_URI = "http://localhost:63342";
-
     private BucketService bucketService;
 
-    @CrossOrigin(origins = CROSS_ORIGIN_URI)
+    @CrossOrigin(origins = BucketUtils.CROSS_ORIGIN_URI)
     @RequestMapping(value = "/buckets", method = RequestMethod.GET)
     public List<Bucket> loadBuckets(@RequestParam(value = "userId") String userId,
                                     @RequestParam(value = "bucketId", required = false) String bucketId) {
@@ -41,7 +40,7 @@ public class BucketController {
         return buckets;
     }
 
-    @CrossOrigin(origins = CROSS_ORIGIN_URI)
+    @CrossOrigin(origins = BucketUtils.CROSS_ORIGIN_URI)
     @RequestMapping(value = "/buckets/createDemoBucket", method = RequestMethod.GET)
     public List<Bucket> createDemoBucket(@RequestParam(value = "userId", defaultValue = "NoneProvided") String userId) {
         bucketService.createDemoBucket();
@@ -50,25 +49,23 @@ public class BucketController {
         return buckets;
     }
 
-    @CrossOrigin(origins = CROSS_ORIGIN_URI)
+    @CrossOrigin(origins = BucketUtils.CROSS_ORIGIN_URI)
     @RequestMapping(value = "/buckets/format", method = RequestMethod.GET)
     public void reformatDB(@RequestParam(value = "userId") String userId) {
         bucketService.reformatDB(userId);
     }
 
     @ResponseBody
-    @CrossOrigin(origins = "http://localhost:63342")
+    @CrossOrigin(origins = BucketUtils.CROSS_ORIGIN_URI)
     @RequestMapping(value = "/buckets/saveBucket", method = RequestMethod.POST)
     public List<Bucket> saveBucket(@RequestBody Bucket bucket) { //@RequestParam(value = "userId") String userId,
         String userId = DemoUtils.DEMO_USER_ID;
-        if (bucket.id.isEmpty()) {
-            bucket.setOwner(userId);
-            bucketService.saveBucket(bucket);
-        }
+        bucket.setOwner(userId);
+        bucketService.saveBucket(bucket);
         return bucketService.loadBucketsForUser(userId);
     }
 
-    @CrossOrigin(origins = "http://localhost:63342")
+    @CrossOrigin(origins = BucketUtils.CROSS_ORIGIN_URI)
     @RequestMapping(value = "/buckets/format/{bucketId}", method = RequestMethod.DELETE)
     public List<Bucket> deleteBucket(@PathVariable String bucketId, @RequestParam(value = "userId") String userId) {
         String demoUserId = DemoUtils.DEMO_USER_ID;
