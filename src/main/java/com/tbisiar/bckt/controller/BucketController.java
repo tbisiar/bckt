@@ -57,7 +57,7 @@ public class BucketController {
 
     @ResponseBody
     @CrossOrigin(origins = BucketUtils.CROSS_ORIGIN_URI)
-    @RequestMapping(value = "/buckets/saveBucket", method = RequestMethod.POST)
+    @RequestMapping(value = "/buckets/save", method = RequestMethod.POST)
     public List<Bucket> saveBucket(@RequestBody Bucket bucket) { //@RequestParam(value = "userId") String userId,
         String userId = DemoUtils.DEMO_USER_ID;
         bucket.setOwner(userId);

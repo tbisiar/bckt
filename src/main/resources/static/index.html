@@ -13,13 +13,13 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
     <link rel="stylesheet" href="css/bckt.css">
 
     <!-- TODO: move scripts to bottom of body for quicker page loading -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-    <script src="js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
     <!-- apparently bootstrap requires tether, but doesn't include it -->
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -93,21 +93,23 @@
             <label for="bucketDescription">Bucket Description</label>
             <input id="bucketDescription" placeholder="Bucket Description" type="text">
             <!-- Add ability to add / remove drops -->
+            <label for="bucketDropSelect">Bucket Drop Selection</label>
             <select id="bucketDropSelect">
                 <option>No Drops Available</option>
             </select>
             <ul id="bucketDropList"></ul>
-            <button id="saveBucket" type="submit" disabled>Save Bucket</button>
-            <button id="deleteBucket" type="submit" disabled>Delete Bucket</button>
+            <button id="bucketSave" type="submit" disabled>Save Bucket</button>
+            <button id="bucketDelete" type="submit" disabled>Delete Bucket</button>
         </form>
     </fieldset>
     <fieldset>
         <legend>Drops</legend>
         <form>
-            <label for="editDrop">Select a drop to edit</label>
-            <select id="editDrop">
+            <label for="dropSelect">Select a drop to edit</label>
+            <select id="dropSelect">
                 <option>Create New</option>
             </select>
+            <input id="dropId" type="hidden"/>
             <label for="dropTitle">Drop Title</label>
             <input id="dropTitle" placeholder="Drop Title" type="text">
             <label for="dropDescription">Drop Description</label>
@@ -119,8 +121,8 @@
                 <option>Restaurant</option>
             </select>
             <!-- Add ability to add / remove photos, location, restriction -->
-
-            <button type="submit">Save Drop</button>
+            <button id="dropSave" type="submit" disabled>Save Drop</button>
+            <button id="dropDelete" type="submit" disabled>Delete Drop</button>
         </form>
     </fieldset>
     <form>
